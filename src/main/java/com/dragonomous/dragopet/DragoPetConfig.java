@@ -45,10 +45,21 @@ public interface DragoPetConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "virtualLevels",
+		name = "Virtual level-ups",
+		description = "Also cheer for virtual levels past 99 (up to 126)",
+		position = 3
+	)
+	default boolean virtualLevels()
+	{
+		return true;
+	}
+
+	@ConfigItem(
 		keyName = "drops",
 		name = "Celebrate drops",
 		description = "Drago gets excited about valuable drops, new collection log slots and pets",
-		position = 3
+		position = 4
 	)
 	default boolean drops()
 	{
@@ -59,7 +70,7 @@ public interface DragoPetConfig extends Config
 		keyName = "deaths",
 		name = "Cry on death",
 		description = "Drago cries when you die",
-		position = 4
+		position = 5
 	)
 	default boolean deaths()
 	{
@@ -70,7 +81,7 @@ public interface DragoPetConfig extends Config
 		keyName = "lowHp",
 		name = "Sweat on low HP",
 		description = "Drago gets nervous when your hitpoints are low",
-		position = 5
+		position = 6
 	)
 	default boolean lowHp()
 	{
@@ -82,7 +93,7 @@ public interface DragoPetConfig extends Config
 		keyName = "lowHpPercent",
 		name = "Low HP threshold (%)",
 		description = "Below this percentage of your max hitpoints Drago starts sweating",
-		position = 6
+		position = 7
 	)
 	default int lowHpPercent()
 	{
@@ -93,7 +104,7 @@ public interface DragoPetConfig extends Config
 		keyName = "sleep",
 		name = "Fall asleep when idle",
 		description = "Drago naps when you stand still for a minute",
-		position = 7
+		position = 8
 	)
 	default boolean sleep()
 	{

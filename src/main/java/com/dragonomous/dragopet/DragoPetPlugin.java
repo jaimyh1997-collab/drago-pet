@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import net.runelite.api.ChatMessageType;
 import net.runelite.api.Client;
+import net.runelite.api.Experience;
 import net.runelite.api.GameState;
 import net.runelite.api.Player;
 import net.runelite.api.Skill;
@@ -103,9 +104,11 @@ public class DragoPetPlugin extends Plugin
 	public void onStatChanged(StatChanged event)
 	{
 		Skill skill = event.getSkill();
-		int level = event.getLevel();
+		// getLevel() stops at 99; the XP-based level keeps counting virtual levels up to 126.
+		int level = Experience.getLevelForXp(event.getXp());
 		Integer previous = knownLevels.put(skill, level);
-		if (previous != null && level > previous && config.levelUps())
+		boolean virtual = level > Experience.MAX_REAL_LEVEL;
+		if (previous != null && level > previous && config.levelUps() && (!virtual || config.virtualLevels()))
 		{
 			react(DragoMood.LEVEL_UP, LEVEL_UP_TICKS, "gz! " + skill.getName() + " " + level);
 		}
